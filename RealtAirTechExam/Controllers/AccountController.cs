@@ -5,6 +5,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Application.Commons;
+using Application.DTO;
+using Application.UserApplication.Command;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -17,9 +20,11 @@ namespace RealtAirTechExam.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly ICommand<UserDTO> _CreateUserCommand;
 
         public AccountController()
         {
+            _CreateUserCommand = new CreateUserCommand();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -155,6 +160,7 @@ namespace RealtAirTechExam.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    _CreateUserCommand.ExecuteCommand(ConvertToUserDTO(model,user));
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -480,6 +486,21 @@ namespace RealtAirTechExam.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+        #endregion
+
+        #region ObjectToObjectMethods
+
+        UserDTO ConvertToUserDTO(RegisterViewModel model, ApplicationUser userApp)
+        {
+            return new UserDTO()
+            {
+                LastName = model.LastName,
+                FirstName = model.FirstName,
+                AspNetUserId = userApp.Id,
+                Id = 0
+            };
+        }
+
         #endregion
     }
 }

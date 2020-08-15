@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtAirTechExam", "RealtAirTechExam\RealtAirTechExam.csproj", "{2407258F-C5AA-4D0E-BED4-ADF744A25B14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{2968976B-0A1C-42FC-B81D-7D465B052DE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{E844C14D-7F7C-46BC-8E63-1C2E23279965}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2407258F-C5AA-4D0E-BED4-ADF744A25B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2407258F-C5AA-4D0E-BED4-ADF744A25B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2407258F-C5AA-4D0E-BED4-ADF744A25B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2968976B-0A1C-42FC-B81D-7D465B052DE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2968976B-0A1C-42FC-B81D-7D465B052DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2968976B-0A1C-42FC-B81D-7D465B052DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2968976B-0A1C-42FC-B81D-7D465B052DE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E844C14D-7F7C-46BC-8E63-1C2E23279965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E844C14D-7F7C-46BC-8E63-1C2E23279965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E844C14D-7F7C-46BC-8E63-1C2E23279965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E844C14D-7F7C-46BC-8E63-1C2E23279965}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
