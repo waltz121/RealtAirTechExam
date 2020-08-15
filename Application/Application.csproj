@@ -52,13 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commons\ICommand.cs" />
+    <Compile Include="Commons\IQuery.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserApplication\Command\CreateUserCommand.cs" />
+    <Compile Include="UserApplication\Query\GetUserViaAspNetIdQuery.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserApplication\Query\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{2968976B-0A1C-42FC-B81D-7D465B052DE9}</Project>
