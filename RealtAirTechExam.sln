@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{E844C14D-7F7C-46BC-8E63-1C2E23279965}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtAirTechExam.WebApi", "RealtAirTechExam.WebApi\RealtAirTechExam.WebApi.csproj", "{77B5E15F-2471-4BFD-A8F2-49A35A55F633}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E844C14D-7F7C-46BC-8E63-1C2E23279965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E844C14D-7F7C-46BC-8E63-1C2E23279965}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E844C14D-7F7C-46BC-8E63-1C2E23279965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B5E15F-2471-4BFD-A8F2-49A35A55F633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B5E15F-2471-4BFD-A8F2-49A35A55F633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B5E15F-2471-4BFD-A8F2-49A35A55F633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B5E15F-2471-4BFD-A8F2-49A35A55F633}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

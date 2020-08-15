@@ -496,7 +496,7 @@ namespace RealtAirTechExam.Controllers
             {
                 LastName = model.LastName,
                 FirstName = model.FirstName,
-                AspNetUserId = userApp.Id,
+                AspNetUser = userApp.Id,
                 Id = 0
             };
         }

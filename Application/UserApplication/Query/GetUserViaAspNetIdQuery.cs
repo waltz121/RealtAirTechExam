@@ -1,9 +1,11 @@
 ﻿using Application.Commons;
 using Application.DTO;
-using DataAccess.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,26 +13,42 @@ namespace Application.UserApplication.Query
 {
     public class GetUserViaAspNetIdQuery : IQuery<UserDTO>
     {
-        private readonly RealAirTechExamContext context;
         string AspNetUserId;
         public GetUserViaAspNetIdQuery(string AspNetUserId)
         {
-            context = new RealAirTechExamContext();
             this.AspNetUserId = AspNetUserId;
         }
 
         public UserDTO ExecuteQuery()
         {
-            var user = context.Users.Where(x => x.AspNetUser.Contains(AspNetUserId))
-                .Select(x => new UserDTO()
-                {
-                    AspNetUserId = x.AspNetUser,
-                    FirstName = x.FirstName,
-                    Id = x.Id,
-                    LastName = x.LastName
-                }).FirstOrDefault();
+            string responsedata = string.Empty;
 
-            return user;
+            try
+            {
+                string url = UtilitySettings.WebApiUrl + "User/GetUserViaAspNetId";
+                url = url + "?UserId=" + AspNetUserId;
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Method = "GET";
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    Stream dataStream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(dataStream);
+
+                    responsedata = reader.ReadToEnd();
+
+                    reader.Close();
+                    dataStream.Close();
+                }
+
+                return JsonConvert.DeserializeObject<UserDTO>(responsedata);
+            }
+            catch (Exception ex)
+            {
+               throw new System.InvalidOperationException(ex.Message);
+            }
+
+           
         }
     }
 }
