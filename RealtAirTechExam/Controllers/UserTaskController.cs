@@ -21,12 +21,14 @@ namespace RealtAirTechExam.Controllers
         private ICommand<UserTaskDTO> createUserTaskCommand;
         private ICommand<int> deleteUserTaskCommand;
         private ICommand<int> markAsDoneUserTaskCommand;
+        private ICommand<UserTaskDTO> updateUserTaskCommand;
 
         public UserTaskController()
         {
             createUserTaskCommand = new CreateUserTaskCommand();
             deleteUserTaskCommand = new DeleteUserTaskCommand();
             markAsDoneUserTaskCommand = new MarkUserTaskAsDoneCommand();
+            updateUserTaskCommand = new UpdateUserTaskCommand();
         }
         // GET: UserTask
         public ActionResult Index()
@@ -74,9 +76,16 @@ namespace RealtAirTechExam.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit()
+        public ActionResult Edit(UserTaskDTO userTaskdto)
         {
-            return View();
+            return View(userTaskdto);
+        }
+
+        [HttpPost]
+        public ActionResult EditUserTasks(UserTaskDTO userTaskdto)
+        {
+            updateUserTaskCommand.ExecuteCommand(userTaskdto);
+            return RedirectToAction("Index");
         }
     }
 }

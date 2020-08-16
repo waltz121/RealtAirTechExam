@@ -65,6 +65,7 @@
     <Compile Include="UserTaskApplication\Command\CreateUserTaskCommand.cs" />
     <Compile Include="UserTaskApplication\Command\DeleteUserTaskCommand.cs" />
     <Compile Include="UserTaskApplication\Command\MarkUserTaskAsDoneCommand.cs" />
+    <Compile Include="UserTaskApplication\Command\UpdateUserTaskCommand.cs" />
     <Compile Include="UserTaskApplication\Query\GetAllUserTasksViaUserIdQuery.cs" />
   </ItemGroup>
   <ItemGroup />

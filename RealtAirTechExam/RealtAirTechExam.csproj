@@ -244,6 +244,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserTask\Index.cshtml" />
     <Content Include="Views\UserTask\CreateUserTasks.cshtml" />
+    <Content Include="Views\UserTask\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

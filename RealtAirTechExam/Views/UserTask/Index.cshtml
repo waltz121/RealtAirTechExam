@@ -39,10 +39,10 @@
                         </div>
                     </td>
                     <td style="width: 10%">
-                        <button class="btn">Edit</button>
+                        @Html.ActionLink("Edit", "Edit", "UserTask", d, new { @class = "btn btn-primary" })
                     </td>
                     <td style="width: 10%">
-                        <button id="DeleteUserTasks" class="btn" onclick="DeleteUserTasks(@d.Id)">Delete</button>
+                        <button id="DeleteUserTasks" class="btn btn-primary" onclick="DeleteUserTasks(@d.Id)">Delete</button>
                     </td>
                 </tr>
             }
