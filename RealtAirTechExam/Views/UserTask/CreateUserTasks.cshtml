@@ -1,0 +1,32 @@
+﻿@model RealtAirTechExam.Models.CreateUserTasksViewModel
+
+@{
+    ViewBag.Title = "CreateUserTasks";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <h2>Create User Tasks</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("CreateUserTasks", "UserTask", FormMethod.Post, new { id = "form", novalidate = "" }))
+        {
+            <form>
+                <div class="form-group">
+                    <label for="Name">Name: </label>
+                    @Html.TextBoxFor(x => x.userTaskDTO.Name, new { @class = "form-control", @id = "Name" })
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description: </label>
+                    @Html.TextAreaFor(x => x.userTaskDTO.Description, new { @class = "form-control", @id = "Description", @cols = "100", @rows = "8", @style = "width:100%;" })
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        }
+
+    </div>
+</div>

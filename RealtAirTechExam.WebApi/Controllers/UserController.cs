@@ -29,7 +29,7 @@ namespace RealtAirTechExam.WebApi.Controllers
             catch(Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
-            }        
+            }
         }
 
         [HttpGet]

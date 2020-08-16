@@ -1,7 +1,59 @@
-﻿
+﻿@model RealtAirTechExam.Models.UserTasksViewModel
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <h2>User Tasks</h2>
+                @Html.ActionLink("Add Tasks", "CreateUserTasks", "UserTask", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <th>Done?</th>
+                <th>Name</th>
+                <th>Delete</th>
+            </tr>
 
+            @foreach (var d in Model.userTaskDTOs)
+            {
+                <tr>
+                    <td>
+                        @d.IsDone
+                    </td>
+
+                    <td>@d.Name</td>
+                    <td>
+                        <button id="DeleteUserTasks" class="btn" data-id="@d.Id">Delete</button>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DeleteUserTasks').click(function (item) {
+
+                var id = $(this).data('id');
+
+                var url = "/UserTask/DeleteUserTask?Id=" + id;
+                //var url = "https://localhost:44303/api/";
+                //url = url + "UserTask/DeleteUserTask";
+                $.ajax({
+                    url: url,
+                    type: "GET"
+                })
+            });
+        });
+    </script>
+}

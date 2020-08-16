@@ -9,23 +9,23 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.UserApplication.Query
+namespace Application.UserTaskApplication.Query
 {
-    public class GetUserViaAspNetIdQuery : IQuery<UserDTO>
+    public class GetAllUserTasksViaUserIdQuery : IQuery<List<UserTaskDTO>>
     {
         string AspNetUserId;
-        public GetUserViaAspNetIdQuery(string AspNetUserId)
+        public GetAllUserTasksViaUserIdQuery(string AspNetUserId)
         {
             this.AspNetUserId = AspNetUserId;
         }
 
-        public UserDTO ExecuteQuery()
+        public List<UserTaskDTO> ExecuteQuery()
         {
             string responsedata = string.Empty;
 
             try
             {
-                string url = UtilitySettings.WebApiUrl + "User/GetUserViaAspNetId";
+                string url = UtilitySettings.WebApiUrl + "UserTask/GetAllUserTasksViaUserId";
                 url = url + "?UserId=" + AspNetUserId;
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.Method = "GET";
@@ -41,11 +41,11 @@ namespace Application.UserApplication.Query
                     dataStream.Close();
                 }
 
-                return JsonConvert.DeserializeObject<UserDTO>(responsedata);
+                return JsonConvert.DeserializeObject<List<UserTaskDTO>>(responsedata);
             }
             catch (Exception ex)
             {
-               throw new System.InvalidOperationException(ex.Message);
+                throw new System.InvalidOperationException(ex.Message);
             }
         }
     }

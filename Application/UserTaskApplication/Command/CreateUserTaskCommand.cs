@@ -1,6 +1,5 @@
 ﻿using Application.Commons;
 using Application.DTO;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,26 +8,27 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.UserApplication.Query
+namespace Application.UserTaskApplication.Command
 {
-    public class GetUserViaAspNetIdQuery : IQuery<UserDTO>
+    public class CreateUserTaskCommand : ICommand<UserTaskDTO>
     {
-        string AspNetUserId;
-        public GetUserViaAspNetIdQuery(string AspNetUserId)
-        {
-            this.AspNetUserId = AspNetUserId;
-        }
-
-        public UserDTO ExecuteQuery()
+        public void ExecuteCommand(UserTaskDTO obj)
         {
             string responsedata = string.Empty;
 
             try
             {
-                string url = UtilitySettings.WebApiUrl + "User/GetUserViaAspNetId";
-                url = url + "?UserId=" + AspNetUserId;
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                request.Method = "GET";
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(UtilitySettings.WebApiUrl + "UserTask/AddUserTask");
+                request.ContentType = "application/json";
+                request.Method = "POST";
+
+                using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    string json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                }
 
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
@@ -40,12 +40,10 @@ namespace Application.UserApplication.Query
                     reader.Close();
                     dataStream.Close();
                 }
-
-                return JsonConvert.DeserializeObject<UserDTO>(responsedata);
             }
             catch (Exception ex)
             {
-               throw new System.InvalidOperationException(ex.Message);
+                throw new System.InvalidOperationException(ex.Message);
             }
         }
     }
