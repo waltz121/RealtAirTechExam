@@ -40,7 +40,7 @@ namespace RealtAirTechExam.WebApi.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage DeleteUserTask(int id)
         {
             try
@@ -56,15 +56,25 @@ namespace RealtAirTechExam.WebApi.Controllers
             }
         }
 
-        [HttpPost]
-        public HttpResponseMessage UserTaskMarkAsDone(UserTask userTask)
+        [HttpGet]
+        public HttpResponseMessage UserTaskMarkAsDone(int Id)
         {
             try
             {
-                userTask.IsDone = true;
-                context.Update(userTask);
+                var UserTask = context.UserTasks.Where(x => x.Id == Id).FirstOrDefault();
+
+                if (UserTask.IsDone)
+                {
+                    UserTask.IsDone = false;
+                }
+                else
+                {
+                    UserTask.IsDone = true;
+                }
+
+                context.Update(UserTask);
                 context.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK, userTask.Id);
+                return Request.CreateResponse(HttpStatusCode.OK, "Success!");
             }
             catch (Exception ex)
             {

@@ -19,10 +19,14 @@ namespace RealtAirTechExam.Controllers
         private IQuery<List<UserTaskDTO>> getAllUserTasksViaUserIdQuery;
         private IQuery<UserDTO> getUserViaAspeNetIdQuery;
         private ICommand<UserTaskDTO> createUserTaskCommand;
-       
+        private ICommand<int> deleteUserTaskCommand;
+        private ICommand<int> markAsDoneUserTaskCommand;
+
         public UserTaskController()
         {
             createUserTaskCommand = new CreateUserTaskCommand();
+            deleteUserTaskCommand = new DeleteUserTaskCommand();
+            markAsDoneUserTaskCommand = new MarkUserTaskAsDoneCommand();
         }
         // GET: UserTask
         public ActionResult Index()
@@ -58,8 +62,21 @@ namespace RealtAirTechExam.Controllers
         [HttpGet]
         public ActionResult DeleteUserTask(int Id)
         {
-
+            deleteUserTaskCommand.ExecuteCommand(Id);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult MarkAsDone(int Id)
+        {
+            markAsDoneUserTaskCommand.ExecuteCommand(Id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            return View();
         }
     }
 }

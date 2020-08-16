@@ -18,19 +18,31 @@
             <tr>
                 <th>Done?</th>
                 <th>Name</th>
+                <th>Description</th>
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
 
             @foreach (var d in Model.userTaskDTOs)
             {
                 <tr>
-                    <td>
-                        @d.IsDone
+                    <td style="width: 10%">
+                        @Html.CheckBoxFor(m => d.IsDone, new { @class = "form-control", @id = "UserTaskIsDone",  @onClick="UserTaskIsDone("+ d.Id +")" })
                     </td>
 
-                    <td>@d.Name</td>
-                    <td>
-                        <button id="DeleteUserTasks" class="btn" data-id="@d.Id">Delete</button>
+                    <td style="width: 20%">
+                        <div id="nameCell-@d.Id">
+                        </div>
+                    </td>
+                    <td width="50%">
+                        <div id="descriptionCell-@d.Id">
+                        </div>
+                    </td>
+                    <td style="width: 10%">
+                        <button class="btn">Edit</button>
+                    </td>
+                    <td style="width: 10%">
+                        <button id="DeleteUserTasks" class="btn" onclick="DeleteUserTasks(@d.Id)">Delete</button>
                     </td>
                 </tr>
             }
@@ -41,19 +53,68 @@
 
 @section scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#DeleteUserTasks').click(function (item) {
+         
+        var Tasks = @Html.Raw(Json.Encode(Model.userTaskDTOs));
+        OnLoadName();
+        OnLoadDescription();
 
-                var id = $(this).data('id');
+        function OnLoadName() {
+            for (var i = 0; i < Tasks.length; i++) {
+                var NameElement = document.getElementById("nameCell-" + Tasks[i].Id);
+                var p = document.createElement("p");
+                var s = document.createElement("s");
 
-                var url = "/UserTask/DeleteUserTask?Id=" + id;
-                //var url = "https://localhost:44303/api/";
-                //url = url + "UserTask/DeleteUserTask";
-                $.ajax({
-                    url: url,
-                    type: "GET"
-                })
-            });
-        });
+                p.textContent = Tasks[i].Name;
+                s.appendChild(p);
+
+                if (Tasks[i].IsDone == true) {
+                    NameElement.appendChild(s);
+                } else {
+                    NameElement.appendChild(p);
+                }
+            }
+        }
+
+        function OnLoadDescription() {
+             for (var i = 0; i < Tasks.length; i++) {
+                var NameElement = document.getElementById("descriptionCell-" + Tasks[i].Id);
+                var p = document.createElement("p");
+                var s = document.createElement("s");
+
+                p.textContent = Tasks[i].Description;
+                s.appendChild(p);
+
+                if (Tasks[i].IsDone == true) {
+                    NameElement.appendChild(s);
+                } else {
+                    NameElement.appendChild(p);
+                }
+            }
+        }
+
+        function DeleteUserTasks(id) {
+
+            var url = "/UserTask/DeleteUserTask?Id=" + id;
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function () {
+                    window.location.href = "/UserTask";
+                }
+            })
+        }
+
+        function UserTaskIsDone(data) {
+             var url = "/UserTask/MarkAsDone?Id=" + data;
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function () {
+                    window.location.href = "/UserTask";
+                }
+            })
+        }
     </script>
 }
